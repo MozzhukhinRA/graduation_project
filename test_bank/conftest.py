@@ -4,8 +4,7 @@ from dotenv import load_dotenv
 from selene import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
-from utils import attach
+from test_bank.utils import attach
 
 
 @pytest.fixture(scope='function')
@@ -14,7 +13,8 @@ def local_test():
     driver_options.page_load_strategy = 'eager'
     browser.config.driver_options = driver_options
 
-    browser.driver.set_window_size(1920, 1080)
+    browser.config.window_width = 1100
+    browser.config.window_height = 1080
     browser.open('https://uralsib.ru/')
 
     yield
@@ -47,12 +47,14 @@ def selenoid_test():
     login = os.getenv('LOGIN')
     password = os.getenv('PASSWORD')
     options.capabilities.update(selenoid_capabilities)
+
     driver = webdriver.Remote(
         command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
         options=options)
 
     browser.config.driver = driver
-    browser.driver.set_window_size(1920, 1080)
+    browser.config.window_width = 1100
+    browser.config.window_height = 1080
     browser.open('https://uralsib.ru/')
 
     yield browser
@@ -64,9 +66,11 @@ def selenoid_test():
 
     browser.quit()
 
+
 @pytest.fixture(scope='function')
 def allure_test():
     pass
+
 
 @pytest.fixture(scope='function')
 def bstack_test():
