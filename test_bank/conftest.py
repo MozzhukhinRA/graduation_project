@@ -8,7 +8,7 @@ from test_bank.utils import attach
 
 
 @pytest.fixture(scope='function')
-def local_test():
+def local():
     driver_options = webdriver.ChromeOptions()
     driver_options.page_load_strategy = 'eager'
     browser.config.driver_options = driver_options
@@ -32,7 +32,7 @@ def load_env():
 
 
 @pytest.fixture(scope="function")
-def selenoid_test():
+def selenoid():
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",

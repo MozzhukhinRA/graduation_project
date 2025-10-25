@@ -8,6 +8,7 @@ class MiddlePage:
     selector_field_phone: str = '#card-prilib-personalDataMobilePhone'
     selector_button_submit: str = '[type="submit"]'
     selector_button_info: str = '._1HcN_l'
+    card : str = '._1ip8-v'
 
 
 selector_found_middel = MiddlePage
