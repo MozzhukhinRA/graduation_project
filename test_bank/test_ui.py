@@ -67,3 +67,9 @@ class TestBestProduct:
         middel_page.card_list_bussines()
         middel_page.type_all()
         middel_page.cards_list_all()
+
+
+"""Test #5"""
+
+#@pytest.mark.usefixtures('local')
+#class Test:

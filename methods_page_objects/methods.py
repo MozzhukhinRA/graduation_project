@@ -73,7 +73,7 @@ class MiddelPage:
             have.text('Для бизнеса')).with_(time.sleep(1)).click()
 
     def cards_list_all(self):
-        cards = browser.all(selector_found_middel.card)
+        cards = browser.all(selector_found_middel.selector_choice_card)
         cards.should(have.size(6))
         cards[0].should(have.exact_text('Кредитные карты'))
         cards[1].should(have.exact_text('Дебетовые карты'))
@@ -83,7 +83,7 @@ class MiddelPage:
         cards[5].should(have.exact_text('Премиум'))
 
     def card_list_bussines(self):
-        cards = browser.all(selector_found_middel.card)
+        cards = browser.all(selector_found_middel.selector_choice_card)
         cards.should(have.size(6))
         cards[0].should(have.exact_text('РКО'))
         cards[1].should(have.exact_text('Эквайринг'))
