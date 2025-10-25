@@ -1,33 +1,43 @@
 import time
+from logging import CRITICAL
 
+import allure
 from selene import browser, be, have
 
 from components_page.module_header.credit_card_application.credit_user import user_test_reg
 from components_page.module_header.header import selector_found_header
 from components_page.module_middel.middel import selector_found_middel
+from components_page.module_middel.acquiring_page.acquiring_page import selector_found_acquiring
+from components_page.module_middel.credit_page.credit_page import selector_found_credit
 from components_page.module_header.credit_card_application.credit_form import selector_credit_form
 from components_page.module_header.main_menu.main_menu import selector_menu
 
 
+@allure.severity(severity_level=CRITICAL)
 class MainPage:
+    with allure.step("Производим нажатие на лквую стрелку"):
+        def switch_product_on_main_page_left(self):
+            browser.element(selector_found_header.selector_left_arrow).should(be.visible).click()
 
-    def switch_product_on_main_page_left(self):
-        browser.element(selector_found_header.selector_left_arrow).should(be.visible).click()
+    with allure.step("Производим нажатие на правую стрелку"):
+        def switch_product_on_main_page_right(self):
+            browser.element(selector_found_header.selector_right_arrow).should(be.visible).click()
 
-    def switch_product_on_main_page_right(self):
-        browser.element(selector_found_header.selector_right_arrow).should(be.visible).click()
+    with allure.step("Открываем меню"):
+        def open_menu(self):
+            browser.element(selector_found_header.selector_left_upper_button).should(be.visible).click()
 
-    def open_menu(self):
-        browser.element(selector_found_header.selector_left_upper_button).should(be.visible).click()
+    with allure.step("Нажимаем на кнопку - Войти"):
+        def open_login_page(self):
+            browser.element(selector_found_header.selector_login_button).should(be.visible).click()
 
-    def open_login_page(self):
-        browser.element(selector_found_header.selector_login_button).should(be.visible).click()
+    with allure.step("Выбираем продукт на баннере"):
+        def click_on_product(self):
+            browser.element(selector_found_header.selector_middel_button).should(be.visible).click()
 
-    def click_on_product(self):
-        browser.element(selector_found_header.selector_middel_button).should(be.visible).click()
-
-    def comeback(self):
-        browser.element(selector_found_header.selector_lable_button).click()
+    with allure.step("Нажимаем на логотип для возвращения на главную страницу"):
+        def comeback(self):
+            browser.element(selector_found_header.selector_lable_button).click()
 
 
 class CreditPage:
@@ -93,6 +103,35 @@ class MiddelPage:
         cards[5].should(have.exact_text('ВЭД'))
 
 
+class CartPage:
+
+    def check_card(self):
+        user = user_test_reg()
+        browser.all(selector_found_middel.selector_choice_card)[2].with_(timeout=15).click()
+        browser.all(selector_found_credit.selector_header_card_page).first.should(be.visible)
+        browser.element(selector_found_credit.selector_information).click()
+        browser.element(selector_found_credit.selector_field_phone).click()
+        browser.element(selector_found_credit.selector_field_phone).should(be.visible).type(f'9{user["phone"][2:]}')
+        browser.element(selector_found_credit.selector_button_statement).should(be.clickable)
+
+    def check_product(self):
+        browser.all(selector_found_middel.selector_choice_card)[1].with_(timeout=15).click()
+
+
+class AcquiringPage:
+
+    def acquiring_page(self):
+        browser.all(selector_found_middel.selector_choice_card)[1].with_(timeout=15).click()
+        browser.element(selector_found_acquiring.selector_header_acquiring).should(be.visible).should(
+            have.exact_text('Эквайринг для бизнеса'))
+        browser.all(selector_found_acquiring.selector_name_acquiring).first.should(be.visible).should(
+            have.exact_text('Торговый эквайринг'))
+        browser.all(selector_found_acquiring.selector_button_acquiring).second.should(be.visible).should(
+            have.exact_text('Оставить заявку'))
+
+
+acquiring_page = AcquiringPage()
+cart_page = CartPage()
 menu_page = MainMenuPage()
 main_page = MainPage()
 credit_page = CreditPage()

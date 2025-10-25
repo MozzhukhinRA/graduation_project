@@ -10,5 +10,4 @@ class MiddlePage:
     selector_button_info: str = '._1HcN_l'
 
 
-
 selector_found_middel = MiddlePage

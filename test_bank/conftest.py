@@ -65,13 +65,3 @@ def selenoid():
     attach.add_video(browser)
 
     browser.quit()
-
-
-@pytest.fixture(scope='function')
-def allure_test():
-    pass
-
-
-@pytest.fixture(scope='function')
-def bstack_test():
-    pass
