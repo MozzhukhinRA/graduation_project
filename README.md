@@ -25,7 +25,7 @@
 1) Клонировать репозиторий: git clone https://github.com/MozzhukhinRA/graduation_project
 2) Активировать окружение и установить зависимости: poetry shell, poetry install
 3) Запуск тестов: pytest .
-4) генерацией отчетов Allure: allure serve allure-results
+4) Генерацией отчетов Allure: allure serve allure-results
 
 ##   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="20" width="20"/> Создание сборки на удаленном сервере - Jenkins
 
