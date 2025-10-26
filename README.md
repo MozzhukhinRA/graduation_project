@@ -41,6 +41,7 @@
 
 <p><img title="allure" src="data/logo/img.png"></p>
 <p><img title="allure" src="data/logo/img_allure.png"></p>
+<p><img title="allure" src="data/logo/img_allure_2.png"></p>
 
 
 
@@ -48,6 +49,12 @@
 
 <p><img title="allure_testops" src="data/logo/job_testops.png"></p>
 <p><img title="allure_testops" src="data/logo/img_testops.png"></p>
+
+Так же проверить аттачменты - логи, скриншот, видео. Можно, перейдя в раздел "Запуски", завершить Job и провалиться в него
+
+<p><img title="allure_testops" src="data/logo/job.png"></p>
+<p><img title="allure_testops" src="data/logo/attach.png"></p>
+
 
 
 ## <img width="4%" title="tg" src="data/logo/tg.png"> Интеграция с Telegram в Jenkins для автоматической отправки результатов тестового прогона через бота
