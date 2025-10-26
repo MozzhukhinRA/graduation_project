@@ -1,6 +1,9 @@
+import time
+
 import allure
 import pytest
-from methods_page_objects.methods import main_page, credit_page, menu_page, middel_page, cart_page, acquiring_page
+from methods_page_objects.methods import main_page, credit_page, menu_page, middel_page, cart_page, acquiring_page, \
+    footer_page
 
 """Test #1"""
 
@@ -118,3 +121,24 @@ class TestBusinessCreditCard:
             middel_page.type_business()
         with allure.step('Проверка отображение продукта "Торговый эквайринг"'):
             acquiring_page.acquiring_page()
+
+
+"""Test #7"""
+
+
+@pytest.mark.usefixtures('local')
+class TestPayment:
+    @allure.epic("Платежи и переводы")
+    @allure.feature("Открытие страницы платежей")
+    @allure.story("Проверка успешного открытия")
+    @allure.tag('ui', 'payment', 'positive', 'regress')
+    @allure.severity(allure.severity_level.BLOCKER)
+    def test_open_payment_page(self):
+        with allure.step('Проверяем баннер'):
+            footer_page.assert_info_banner()
+        with allure.step('Проверяем заголовок искомой страницы - "Всё самое нужное под рукой"'):
+            footer_page.assert_header()
+        with allure.step('Нажимаем "Платежи и переводы"'):
+            footer_page.open_payment()
+        with allure.step('Проверяем что попали на страницу "Платежи"'):
+            footer_page.assert_header_page_payment()
