@@ -2,13 +2,13 @@ import time
 
 import allure
 import pytest
-from methods_page_objects.methods import main_page, credit_page, menu_page, middel_page, cart_page, acquiring_page, \
+from methods_page_objects.ui_methods import main_page, credit_page, menu_page, middel_page, cart_page, acquiring_page, \
     footer_page
 
 """Test #1"""
 
 
-@pytest.mark.usefixtures('selenoid')
+@pytest.mark.usefixtures('local')
 class TestProductBannerAndFormCredit:
 
     @allure.epic("Кредитные продукты")
@@ -28,7 +28,7 @@ class TestProductBannerAndFormCredit:
 """Test #2"""
 
 
-@pytest.mark.usefixtures('selenoid')
+@pytest.mark.usefixtures('local')
 class TestProductBar:
 
     @allure.epic("Welcome Page Банка")
@@ -48,7 +48,7 @@ class TestProductBar:
 """Test #3"""
 
 
-@pytest.mark.usefixtures('selenoid')
+@pytest.mark.usefixtures('local')
 class TestMainMenu:
 
     @allure.epic("Welcome Page Банка")
@@ -70,7 +70,7 @@ class TestMainMenu:
 """Test #4"""
 
 
-@pytest.mark.usefixtures('selenoid')
+@pytest.mark.usefixtures('local')
 class TestBestProduct:
 
     @allure.epic("Выбирайте из лучших продуктов")
@@ -92,7 +92,7 @@ class TestBestProduct:
 """Test #5"""
 
 
-@pytest.mark.usefixtures('selenoid')
+@pytest.mark.usefixtures('local')
 class TestAllCreditCard:
 
     @allure.epic("Кредит наличными")
@@ -109,7 +109,7 @@ class TestAllCreditCard:
 """Test #6"""
 
 
-@pytest.mark.usefixtures('selenoid')
+@pytest.mark.usefixtures('local')
 class TestBusinessCreditCard:
     @allure.epic("Эквайринг для бизнеса")
     @allure.feature("Продукты для бизнеса")
@@ -126,7 +126,7 @@ class TestBusinessCreditCard:
 """Test #7"""
 
 
-@pytest.mark.usefixtures('selenoid')
+@pytest.mark.usefixtures('local')
 class TestPayment:
     @allure.epic("Платежи и переводы")
     @allure.feature("Открытие страницы платежей")

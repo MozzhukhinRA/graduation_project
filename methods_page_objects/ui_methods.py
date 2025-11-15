@@ -1,7 +1,4 @@
 import time
-from logging import CRITICAL
-
-import allure
 from selene import browser, be, have
 
 from components_page.module_header.credit_card_application.credit_user import user_test_reg
@@ -14,7 +11,6 @@ from components_page.module_header.credit_card_application.credit_form import se
 from components_page.module_header.main_menu.main_menu import selector_menu
 
 
-@allure.severity(severity_level=CRITICAL)
 class MainPage:
     def switch_product_on_main_page_left(self):
         browser.element(selector_found_header.selector_left_arrow).should(be.visible).click()

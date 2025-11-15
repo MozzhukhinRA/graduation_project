@@ -15,7 +15,8 @@ def local():
 
     browser.config.window_width = 1100
     browser.config.window_height = 1080
-    browser.open('https://uralsib.ru/')
+    base_url = browser.config.base_url = 'https://uralsib.ru/'
+    browser.open(base_url)
 
     yield
 
@@ -55,7 +56,8 @@ def selenoid():
     browser.config.driver = driver
     browser.config.window_width = 1100
     browser.config.window_height = 1080
-    browser.open('https://uralsib.ru/')
+    base_url = browser.config.base_url = 'https://uralsib.ru/'
+    browser.open(base_url)
 
     yield browser
 
@@ -65,3 +67,9 @@ def selenoid():
     attach.add_video(browser)
 
     browser.quit()
+
+
+@pytest.fixture()
+def api_url():
+    browser.config.base_url = 'https://uralsib.ru/'
+    return browser.config.base_url
