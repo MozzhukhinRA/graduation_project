@@ -52,7 +52,7 @@ class CreditPage:
         browser.element(selector_credit_form.field_birthday).should(be.visible).type(
             f'{user["birth"]}')
         browser.element(selector_credit_form.checkbox_1).click()
-        browser.execute_script("window.scrollBy(0, 300)")
+        browser.driver.execute_script("window.scrollBy(0, 300)")
         time.sleep(1)
         browser.element(selector_credit_form.checkbox_2).click()
         browser.element(selector_credit_form.button_continue).should(be.visible).click()
@@ -74,7 +74,7 @@ class MiddelPage:
             have.text('Для всех')).with_(time.sleep(1)).click()
 
     def type_business(self):
-        browser.execute_script("window.scrollBy(0, 500)")
+        browser.driver.execute_script("window.scrollBy(0, 500)")
         time.sleep(1)
         browser.all(selector_found_middel.selector_switcher_for_all_and_business).second.should(
             have.text('Для бизнеса')).with_(time.sleep(1)).click()
@@ -92,7 +92,7 @@ class MiddelPage:
     def card_list_bussines(self):
         cards = browser.all(selector_found_middel.selector_choice_card)
         cards.should(have.size(6))
-        cards[0].should(have.exact_text('РКО'))
+        cards[0].should(have.exact_text('Расчетный счет'))
         cards[1].should(have.exact_text('Эквайринг'))
         cards[2].should(have.exact_text('Бизнес-карты'))
         cards[3].should(have.exact_text('Кредиты'))
@@ -104,7 +104,7 @@ class CartPage:
 
     def check_card(self):
         user = user_test_reg()
-        browser.execute_script("window.scrollBy(0, 500)")
+        browser.driver.execute_script("window.scrollBy(0, 500)")
         time.sleep(1)
         browser.all(selector_found_middel.selector_choice_card)[2].click()
         browser.all(selector_found_credit.selector_header_card_page).first.should(be.visible)
@@ -132,7 +132,7 @@ class AcquiringPage:
 class PaymentPage:
 
     def assert_info_banner(self):
-        browser.execute_script("window.scrollBy(0, 2100)")
+        browser.driver.execute_script("window.scrollBy(0, 2100)")
         time.sleep(1)
         browser.element(selector_found_footer.selector_info_banner).should(be.visible)
 

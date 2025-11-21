@@ -3,6 +3,8 @@ import allure
 from api_resource.api_methods import method_post_statement_card, method_get_search_organizations, method_get_rate, \
     method_get_subscription, method_get_download_logo
 
+"""Test #1"""
+
 
 class TestMethodStatementCreditCard:
     @allure.epic("Кредитные продукты")
@@ -13,6 +15,9 @@ class TestMethodStatementCreditCard:
     def test_statement_card(self, api_url):
         with allure.step('Отправка заявления методом POST, Код = 201'):
             method_post_statement_card(api_url)
+
+
+"""Test #2"""
 
 
 class TestMethodSearchOrganizations:
@@ -26,6 +31,9 @@ class TestMethodSearchOrganizations:
             method_get_search_organizations(api_url)
 
 
+"""Test #3"""
+
+
 class TestMethodExchangeRate:
     @allure.epic("Валюта")
     @allure.feature("Получение курса валют")
@@ -37,6 +45,9 @@ class TestMethodExchangeRate:
             method_get_rate(api_url)
 
 
+"""Test #4"""
+
+
 class TestMethodSubscriptionService:
     @allure.epic("Подписки")
     @allure.feature("Подписки на предоставляемые сервисы")
@@ -46,6 +57,9 @@ class TestMethodSubscriptionService:
     def test_subscription_service(self, api_url):
         with allure.step('Отправляем запрос на получение списка доступных подписок. Код = 200'):
             method_get_subscription(api_url)
+
+
+"""Test #5"""
 
 
 class TestMethodConfirmationPhone:

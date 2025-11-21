@@ -1,51 +1,65 @@
 import os
 import zipfile
+from pprint import pprint
 
 import requests
+from jsonschema import validate
+from api_resource.Schemas.schemas_for_api_response import statement_card_schema, search_organizations_schema, \
+    exchange_rate_schema, subscription_service_schema
+from api_resource.Schemas.schema_for_api_requests import statement_card_schema_request, \
+    search_organizations_schema_request, exchange_rate_schema_request, subscription_service_schema_request
 
 
 class StatementCard:
     def statement_card(self, api_url):
         url = f"{api_url}api/form-core/sessions/2cf31012-524c-4a9f-a56d-794189f429aa/events"
-        response = requests.post(url, data={
-            "action": "next_button"
-        })
+        data = {"action": "next_button"}
+        validate(data, statement_card_schema_request)
+        response = requests.post(url, data=data)
         assert response.status_code == 201
+        validate(response.json(), statement_card_schema)
         return response
 
 
 class SearchOrganizations:
     def search_organizations(self, api_url):
         url = f"{api_url}api/dadata/suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party?"
-        response = requests.get(url, params={
-            'query': '1207700465455'
-        })
+        params = {'query': '1207700465455'}
+        validate(params, search_organizations_schema_request)
+        response = requests.get(url, params=params)
         assert response.status_code == 200
+        validate(response.json(), search_organizations_schema)
         return response
 
 
 class ExchangeRate:
     def exchange_rate(self, api_url):
         url = f"{api_url}api/exchange-rates/ranges?"
-        response = requests.get(url, params={
+        params = {
             'from': 'RUR',
             'to': 'USD',
             'filter[type]': 'online',
-            'filter[region]': 78})
+            'filter[region]': 78}
+        validate(params, exchange_rate_schema_request)
+        response = requests.get(url, params=params)
         assert response.status_code == 200
+        validate(response.json(), exchange_rate_schema)
         return response
 
 
 class SubscriptionService:
     def subscription_service(self, api_url):
         url = f"{api_url}api/faq/list/faq/personal/podpiski?"
-        response = requests.get(url, params={
+        params = {
             'depth': 2,
             'sort': 'sort',
             'filter[content.fields.multiselect]': 'tags,populyarnyi',
             'filter[content.template.name]': 'question'
-        })
+        }
+        validate(params, subscription_service_schema_request)
+        response = requests.get(url, params=params)
         assert response.status_code == 200
+        validate(response.json(), subscription_service_schema)
         return response
 
 
@@ -63,6 +77,10 @@ class DownloadLogo:
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_to)
 
+        os.remove(zip_path)
+
+        assert response.status_code == 200
+        assert response.headers['Content-Type'] == 'application/zip'
         return extract_to
 
 

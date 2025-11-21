@@ -1,5 +1,3 @@
-import time
-
 import allure
 import pytest
 from methods_page_objects.ui_methods import main_page, credit_page, menu_page, middel_page, cart_page, acquiring_page, \
