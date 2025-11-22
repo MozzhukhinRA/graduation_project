@@ -1,13 +1,15 @@
 import os
 import zipfile
-from pprint import pprint
 
 import requests
 from jsonschema import validate
+from selene import browser
+
 from api_resource.Schemas.schemas_for_api_response import statement_card_schema, search_organizations_schema, \
     exchange_rate_schema, subscription_service_schema
 from api_resource.Schemas.schema_for_api_requests import statement_card_schema_request, \
     search_organizations_schema_request, exchange_rate_schema_request, subscription_service_schema_request
+from test_bank.utils import attach
 
 
 class StatementCard:
@@ -18,6 +20,7 @@ class StatementCard:
         response = requests.post(url, data=data)
         assert response.status_code == 201
         validate(response.json(), statement_card_schema)
+        attach.add_logs(browser)
         return response
 
 
@@ -29,6 +32,7 @@ class SearchOrganizations:
         response = requests.get(url, params=params)
         assert response.status_code == 200
         validate(response.json(), search_organizations_schema)
+        attach.add_logs(browser)
         return response
 
 
@@ -44,6 +48,7 @@ class ExchangeRate:
         response = requests.get(url, params=params)
         assert response.status_code == 200
         validate(response.json(), exchange_rate_schema)
+        attach.add_logs(browser)
         return response
 
 
@@ -60,6 +65,7 @@ class SubscriptionService:
         response = requests.get(url, params=params)
         assert response.status_code == 200
         validate(response.json(), subscription_service_schema)
+        attach.add_logs(browser)
         return response
 
 
@@ -81,6 +87,7 @@ class DownloadLogo:
 
         assert response.status_code == 200
         assert response.headers['Content-Type'] == 'application/zip'
+        attach.add_logs(browser)
         return extract_to
 
 
